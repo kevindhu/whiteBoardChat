@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>WhiteBoard App</title>
+    </head>
+    <body>
+        <h1 id="title">COLLAB WHITEBOARD</h1>
+        <table>
+            <tr>
+                <td>
+                    <canvas id="myCanvas" width="150" height="150" style="border:1px solid #000000;"></canvas>
+                    <textarea id="messageTextArea" readonly="readonly" rows="10" cols="45"></textarea>
+                    <input type="text" id="textInput" size="50" />
+                    <input type="button" value="Send" onclick="defineMessage();" />
+                </td>
+                <td>
+                    <form name="inputForm">
+                        <table>
+                            <tr>
+                                <th>Color</th>
+                                <td><input type="radio" name="color" value="#FF0000" checked="true">Red</td>
+                                <td><input type="radio" name="color" value="#0000FF">Blue</td>
+                                <td><input type="radio" name="color" value="#FF9900">Orange</td>
+                                <td><input type="radio" name="color" value="#33CC33">Green</td>
+                            </tr>
+
+                            <tr>
+                                <th>Shape</th>
+                                <td><input type="radio" name="shape" value="square" checked="true">Square</td>
+                                <td><input type="radio" name="shape" value="circle">Circle</td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                        </table>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <script type = "text/javascript" src="whiteBoardSocket.js"></script>
+        <script type = "text/javascript" src="whiteBoard.js"></script>
+        <script type = "text/javascript" src="TextChat.js"></script>
+    </body>
+</html>
