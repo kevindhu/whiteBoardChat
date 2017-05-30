@@ -6,14 +6,11 @@ public class ChatMessage implements Message{
     private String username;
     private String message;
     private JsonObject json;
-    private String updateStatus;
 
     public ChatMessage(JsonObject json) {
-        this.message = json.getString("message");
+        this.message = json.getString("chatText");
         this.json = json;
-        this.updateStatus = "false";
     }
-
 
     @Override
     public JsonObject getJson() {
@@ -40,14 +37,6 @@ public class ChatMessage implements Message{
 
     public String getMessage() {
         return message;
-    }
-
-    public void setUpdateStatus(String status) {
-        updateStatus = status;
-    }
-
-    public String updateStatus() {
-        return updateStatus;
     }
 
 }

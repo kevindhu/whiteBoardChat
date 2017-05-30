@@ -21,7 +21,7 @@ function defineImage(event) {
 
     var json = JSON.stringify(
         {
-            "type" : "image",
+            "type" : "drawMessage",
             "shape": shape.value,
             "color": color.value,
             "coords": {

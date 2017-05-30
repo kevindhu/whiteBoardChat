@@ -1,9 +1,11 @@
 package site.kevindhu.websocket;
 
+import site.kevindhu.model.ChatEncoder;
 import site.kevindhu.model.ChatMessage;
 import site.kevindhu.model.FigureEncoder;
 import site.kevindhu.model.Message;
 import site.kevindhu.model.MessageDecoder;
+import site.kevindhu.model.UserMessage;
 
 import javax.websocket.EncodeException;
 import javax.websocket.OnClose;
@@ -17,11 +19,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @ServerEndpoint(value = "/whiteboardendpoint",
-        encoders = {FigureEncoder.class},
+        encoders = {FigureEncoder.class, ChatEncoder.class,},
         decoders = {MessageDecoder.class})
 
 public class WhiteBoardEndpoint {
     public static Set<Session> peers = Collections.synchronizedSet(new HashSet<>());
+    public static UserMessage users = new UserMessage();
 
     @OnMessage
     public void broadcastMessage(Message message, Session session) throws IOException, EncodeException {
@@ -30,11 +33,13 @@ public class WhiteBoardEndpoint {
             String username = session.getUserProperties().get("username").toString();
             if (username != null) {
                 chatMessage.setUsername(username);
-            }
-            else {
+            } else {
                 chatMessage.setUsername(chatMessage.getMessage());
-                chatMessage.setMessage("you are now" + message);
-                chatMessage.setUpdateStatus("true");
+                session.getUserProperties().put("username",chatMessage.getUsername());
+                chatMessage.setMessage("you are now" + chatMessage.getUsername());
+
+                users.clients().add(chatMessage.getUsername());
+                updateUsernames();
             }
         }
         for (Session peer : peers) {
@@ -53,12 +58,10 @@ public class WhiteBoardEndpoint {
     }
 
 
-    public Set<String> getUsernames() {
-        Set<String> ret = new HashSet<>();
+    public void updateUsernames() throws IOException, EncodeException {
         for (Session peer : peers) {
-            ret.add(peer.getUserProperties().get("username").toString());
+            peer.getBasicRemote().sendObject(users);
         }
-        return ret;
     }
 
 }

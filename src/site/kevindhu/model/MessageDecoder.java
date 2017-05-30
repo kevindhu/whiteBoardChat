@@ -16,7 +16,6 @@ public class MessageDecoder implements Decoder.Text<Message>{
         String type = jsonObject.getString("type");
         if (type.equals("chatMessage")) {
             return new ChatMessage(jsonObject);
-
         }
         else if (type.equals("drawMessage")) {
             return new FigureMessage(jsonObject);

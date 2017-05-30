@@ -25,14 +25,16 @@ function onOpen(message) {
 
 
 function onMessage(message) {
+    alert("message!");
     var json = JSON.parse(message.data);
-    if (json.type == "image") {
+    if (json.type == "drawMessage") {
         drawImageText(message.data);
     }
-    else if (json.type == "text") {
-        if (json.userStatus == "update") {
-            updateUsers(message.data);
+    else if (json.type == "chatMessage") {
         writeChatMsg(message.data);
+    }
+    else if (json.type == "userMessage") {
+        updateUsers(message.data);
     }
 }
 
