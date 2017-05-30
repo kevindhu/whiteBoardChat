@@ -14,6 +14,7 @@ public class ChatEncoder implements Encoder.Text<ChatMessage> {
                 .add("type", "chat")
                 .add("username",chat.getUsername())
                 .add("message",json.getString("message"))
+                .add("updateStatus",chat.updateStatus())
                 .build();
         return ret.toString();
     }

@@ -30,10 +30,9 @@ function onMessage(message) {
         drawImageText(message.data);
     }
     else if (json.type == "text") {
+        if (json.userStatus == "update") {
+            updateUsers(message.data);
         writeChatMsg(message.data);
-    }
-    else if (json.type == "users") {
-        updateUsers(message.data);
     }
 }
 

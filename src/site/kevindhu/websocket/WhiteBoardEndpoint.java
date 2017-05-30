@@ -26,8 +26,16 @@ public class WhiteBoardEndpoint {
     @OnMessage
     public void broadcastMessage(Message message, Session session) throws IOException, EncodeException {
         if (message instanceof ChatMessage) {
+            ChatMessage chatMessage = (ChatMessage) message;
             String username = session.getUserProperties().get("username").toString();
-
+            if (username != null) {
+                chatMessage.setUsername(username);
+            }
+            else {
+                chatMessage.setUsername(chatMessage.getMessage());
+                chatMessage.setMessage("you are now" + message);
+                chatMessage.setUpdateStatus("true");
+            }
         }
         for (Session peer : peers) {
             peer.getBasicRemote().sendObject(message);
