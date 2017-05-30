@@ -26,7 +26,6 @@ function onOpen(message) {
 
 function onMessage(message) {
     var json = JSON.parse(message.data);
-    alert(json.type);
     if (json.type == "drawMessage") {
         drawImageText(message.data);
     }

@@ -11,7 +11,6 @@ function defineMessage() {
             });
         websocket.send(json);
         textInput.value = "";
-        alert(json);
     }
 }
 
