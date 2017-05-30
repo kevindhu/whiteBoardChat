@@ -32,6 +32,9 @@ function onMessage(message) {
     else if (json.type == "text") {
         writeChatMsg(message.data);
     }
+    else if (json.type == "users") {
+        updateUsers(message.data);
+    }
 }
 
 

@@ -10,9 +10,6 @@
             <tr>
                 <td>
                     <canvas id="myCanvas" width="150" height="150" style="border:1px solid #000000;"></canvas>
-                    <textarea id="messageTextArea" readonly="readonly" rows="10" cols="45"></textarea>
-                    <input type="text" id="textInput" size="50" />
-                    <input type="button" value="Send" onclick="defineMessage();" />
                 </td>
                 <td>
                     <form name="inputForm">
@@ -35,10 +32,22 @@
                         </table>
                     </form>
                 </td>
+                <td>
+                    <textarea id="messageTextArea" readonly="readonly" rows="10" cols="45"></textarea>
+                    <input type="text" id="textInput" size="50" />
+                    <input type="button" value="Send" onclick="defineMessage();" />
+                </td>
+                <td>
+                    <textarea id="users" readonly="readonly" rows="10" cols="45"></textarea>
+                </td>
+
             </tr>
         </table>
+        <div id="output"></div>
         <script type = "text/javascript" src="whiteBoardSocket.js"></script>
         <script type = "text/javascript" src="whiteBoard.js"></script>
         <script type = "text/javascript" src="TextChat.js"></script>
+        <script type = "text/javascript" src="UserText.js"></script>
+
     </body>
 </html>

@@ -8,12 +8,20 @@ import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
 import java.io.StringReader;
 
-public class FigureDecoder implements Decoder.Text<Figure>{
+public class MessageDecoder implements Decoder.Text<Message>{
 
     @Override
-    public Figure decode(String string) throws DecodeException {
+    public Message decode(String string) throws DecodeException {
         JsonObject jsonObject = Json.createReader(new StringReader(string)).readObject();
-        return new Figure(jsonObject);
+        String type = jsonObject.getString("type");
+        if (type.equals("chatMessage")) {
+            return new ChatMessage(jsonObject);
+
+        }
+        else if (type.equals("drawMessage")) {
+            return new FigureMessage(jsonObject);
+        }
+        return null;
     }
 
     @Override

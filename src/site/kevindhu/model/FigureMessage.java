@@ -5,10 +5,10 @@ import javax.json.JsonObject;
 import javax.json.JsonWriter;
 import java.io.StringWriter;
 
-public class Figure {
+public class FigureMessage implements Message {
     private JsonObject json;
 
-    public Figure(JsonObject input) {
+    public FigureMessage(JsonObject input) {
         this.json = input;
     }
 

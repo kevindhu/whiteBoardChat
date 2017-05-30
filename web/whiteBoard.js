@@ -30,7 +30,6 @@ function defineImage(event) {
             }
         });
     websocket.send(json);
-    drawImageText(json);
 }
 
 

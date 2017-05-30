@@ -6,17 +6,17 @@ function defineMessage() {
     if (text != null) {
         var json = JSON.stringify(
             {
-                "type" : "text",
-                "chatText": text,
+                "type": "text",
+                "chatText": text
             });
         websocket.send(json);
-        writeChatMsg(json);
+        textInput.value = "";
     }
 }
 
 function writeChatMsg(msg) {
     var json = JSON.parse(msg);
-    addMessage(json.chatText);
+    addMessage(json.user + " : " + json.chatText);
 }
 
 function addMessage(text) {

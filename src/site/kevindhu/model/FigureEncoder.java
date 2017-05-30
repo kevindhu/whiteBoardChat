@@ -4,8 +4,8 @@ import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
 import javax.websocket.EndpointConfig;
 
-public class FigureEncoder implements Encoder.Text<Figure> {
-    public String encode(Figure figure) throws EncodeException {
+public class FigureEncoder implements Encoder.Text<FigureMessage> {
+    public String encode(FigureMessage figure) throws EncodeException {
         return figure.getJson().toString();
     }
 
