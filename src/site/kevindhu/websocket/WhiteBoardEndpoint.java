@@ -5,6 +5,7 @@ import site.kevindhu.model.ChatMessage;
 import site.kevindhu.model.FigureEncoder;
 import site.kevindhu.model.Message;
 import site.kevindhu.model.MessageDecoder;
+import site.kevindhu.model.UserEncoder;
 import site.kevindhu.model.UserMessage;
 
 import javax.websocket.EncodeException;
@@ -19,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @ServerEndpoint(value = "/whiteboardendpoint",
-        encoders = {FigureEncoder.class, ChatEncoder.class,},
+        encoders = {FigureEncoder.class, ChatEncoder.class, UserEncoder.class},
         decoders = {MessageDecoder.class})
 
 public class WhiteBoardEndpoint {
@@ -30,13 +31,13 @@ public class WhiteBoardEndpoint {
     public void broadcastMessage(Message message, Session session) throws IOException, EncodeException {
         if (message instanceof ChatMessage) {
             ChatMessage chatMessage = (ChatMessage) message;
-            String username = session.getUserProperties().get("username").toString();
+            String username = (String) session.getUserProperties().get("username");
             if (username != null) {
                 chatMessage.setUsername(username);
             } else {
                 chatMessage.setUsername(chatMessage.getMessage());
                 session.getUserProperties().put("username",chatMessage.getUsername());
-                chatMessage.setMessage("you are now" + chatMessage.getUsername());
+                chatMessage.setMessage("you are now " + chatMessage.getUsername());
 
                 users.clients().add(chatMessage.getUsername());
                 updateUsernames();
@@ -53,8 +54,10 @@ public class WhiteBoardEndpoint {
     }
 
     @OnClose
-    public void onClose(Session session) {
+    public void onClose(Session session) throws IOException, EncodeException {
         peers.remove(session);
+        users.clients().remove(session.getUserProperties().get("username"));
+        updateUsernames();
     }
 
 

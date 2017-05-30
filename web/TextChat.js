@@ -16,7 +16,6 @@ function defineMessage() {
 }
 
 function writeChatMsg(msg) {
-    alert("writing message");
     var json = JSON.parse(msg);
     addMessage(json.username + " : " + json.chatText);
 }

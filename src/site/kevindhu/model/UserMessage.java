@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserMessage implements Message {
-    List<String> clients;
+    private List<String> clients;
 
     public UserMessage() {
         this.clients = new ArrayList<>();
